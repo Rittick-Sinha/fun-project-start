@@ -3,6 +3,8 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { MetricsCards } from "./MetricsCards";
 import { TrafficChart } from "./TrafficChart";
 import { NamespaceFilters } from "./NamespaceFilters";
+import DashboardTabs from "./DashboardTabs";
+import AlertComponent from "./AlertComponent";
 import { RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -25,8 +27,10 @@ export function DashboardContent() {
         </div>
 
         <NamespaceFilters />
+        <DashboardTabs/>
         <MetricsCards />
         <TrafficChart />
+        <AlertComponent />
       </div>
     </main>
   );

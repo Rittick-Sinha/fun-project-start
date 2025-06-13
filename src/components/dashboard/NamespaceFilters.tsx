@@ -24,9 +24,10 @@ export function NamespaceFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Services</SelectItem>
-            <SelectItem value="frontend">frontend</SelectItem>
-            <SelectItem value="backend">backend</SelectItem>
-            <SelectItem value="database">database</SelectItem>
+            <SelectItem value="frontend">productpage</SelectItem>
+            <SelectItem value="backend">reviews</SelectItem>
+            <SelectItem value="database">ratings</SelectItem>
+            <SelectItem value="database">details</SelectItem>
           </SelectContent>
         </Select>
 
@@ -36,9 +37,12 @@ export function NamespaceFilters() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">All Workloads</SelectItem>
-            <SelectItem value="deployment">Deployments</SelectItem>
-            <SelectItem value="statefulset">StatefulSets</SelectItem>
-            <SelectItem value="daemonset">DaemonSets</SelectItem>
+            <SelectItem value="deployment">productpage v1</SelectItem>
+            <SelectItem value="statefulset">reviews v1</SelectItem>
+            <SelectItem value="daemonset">reviews v2</SelectItem>
+            <SelectItem value="daemonset">reviews v3</SelectItem>
+            <SelectItem value="daemonset">ratings v1</SelectItem>
+            <SelectItem value="daemonset">details v1</SelectItem>
           </SelectContent>
         </Select>
       </div>
