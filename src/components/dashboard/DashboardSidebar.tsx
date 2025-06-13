@@ -23,17 +23,22 @@ import {
 } from "lucide-react";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const menuItems = [
   {
     title: "Dashboard",
     icon: BarChart3,
-    isActive: true,
+    href: "/",
   },
   {
     title: "Observability",
     icon: Eye,
     hasSubmenu: true,
+    submenuItems: [
+      { title: "Traffic Overview", href: "/visibility" },
+      { title: "Errors", href: "/errors" },
+    ]
   },
   {
     title: "Traffic Management",
@@ -43,7 +48,7 @@ const menuItems = [
   {
     title: "Visibility",
     icon: Eye,
-    hasSubmenu: true,
+    href: "/visibility",
   },
   {
     title: "Security",
@@ -72,6 +77,18 @@ const menuItems = [
 ];
 
 export function DashboardSidebar() {
+  const location = useLocation();
+
+  const isActive = (href?: string, submenuItems?: any[]) => {
+    if (href) {
+      return location.pathname === href;
+    }
+    if (submenuItems) {
+      return submenuItems.some(item => location.pathname === item.href);
+    }
+    return false;
+  };
+
   return (
     <Sidebar className="border-r border-gray-200">
       <SidebarHeader className="p-4">
@@ -92,7 +109,7 @@ export function DashboardSidebar() {
                   {item.hasSubmenu ? (
                     <Collapsible>
                       <CollapsibleTrigger asChild>
-                        <SidebarMenuButton className={`w-full justify-between ${item.isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}>
+                        <SidebarMenuButton className={`w-full justify-between ${isActive(item.href, item.submenuItems) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}>
                           <div className="flex items-center gap-3">
                             <item.icon className="w-4 h-4" />
                             <span>{item.title}</span>
@@ -101,13 +118,21 @@ export function DashboardSidebar() {
                         </SidebarMenuButton>
                       </CollapsibleTrigger>
                       <CollapsibleContent className="ml-6 mt-1">
-                        <div className="text-sm text-gray-600 py-1">Submenu items...</div>
+                        {item.submenuItems?.map((subItem) => (
+                          <Link key={subItem.title} to={subItem.href}>
+                            <div className={`text-sm py-1 px-2 rounded hover:bg-gray-100 ${location.pathname === subItem.href ? 'bg-blue-50 text-blue-700' : 'text-gray-600'}`}>
+                              {subItem.title}
+                            </div>
+                          </Link>
+                        ))}
                       </CollapsibleContent>
                     </Collapsible>
                   ) : (
-                    <SidebarMenuButton className={`${item.isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}>
-                      <item.icon className="w-4 h-4" />
-                      <span>{item.title}</span>
+                    <SidebarMenuButton className={`${isActive(item.href) ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`} asChild>
+                      <Link to={item.href || "#"}>
+                        <item.icon className="w-4 h-4" />
+                        <span>{item.title}</span>
+                      </Link>
                     </SidebarMenuButton>
                   )}
                 </SidebarMenuItem>
