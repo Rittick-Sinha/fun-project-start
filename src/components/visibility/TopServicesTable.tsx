@@ -1,6 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Server, AlertCircle, Clock } from "lucide-react";
 
 const servicesData = [
   {
@@ -50,11 +51,26 @@ export function TopServicesTable() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Service</TableHead>
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  <Server className="w-4 h-4 text-gray-500" />
+                  Service
+                </div>
+              </TableHead>
               <TableHead>Path</TableHead>
               <TableHead>Requests</TableHead>
-              <TableHead>Errors</TableHead>
-              <TableHead>Latency</TableHead>
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-red-500" />
+                  Errors
+                </div>
+              </TableHead>
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-yellow-500" />
+                  Latency
+                </div>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
