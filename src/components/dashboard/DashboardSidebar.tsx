@@ -1,0 +1,128 @@
+
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarHeader,
+  SidebarFooter,
+} from "@/components/ui/sidebar";
+import { 
+  BarChart3, 
+  Eye, 
+  BarChart, 
+  Shield, 
+  Users, 
+  Settings, 
+  HelpCircle,
+  Server
+} from "lucide-react";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ChevronDown } from "lucide-react";
+
+const menuItems = [
+  {
+    title: "Dashboard",
+    icon: BarChart3,
+    isActive: true,
+  },
+  {
+    title: "Observability",
+    icon: Eye,
+    hasSubmenu: true,
+  },
+  {
+    title: "Traffic Management",
+    icon: BarChart,
+    hasSubmenu: true,
+  },
+  {
+    title: "Visibility",
+    icon: Eye,
+    hasSubmenu: true,
+  },
+  {
+    title: "Security",
+    icon: Shield,
+  },
+  {
+    title: "Clusters",
+    icon: Server,
+  },
+  {
+    title: "OB Integration",
+    icon: BarChart,
+  },
+  {
+    title: "User Management",
+    icon: Users,
+  },
+  {
+    title: "Settings",
+    icon: Settings,
+  },
+  {
+    title: "Help",
+    icon: HelpCircle,
+  },
+];
+
+export function DashboardSidebar() {
+  return (
+    <Sidebar className="border-r border-gray-200">
+      <SidebarHeader className="p-4">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 bg-blue-600 rounded flex items-center justify-center">
+            <BarChart3 className="w-5 h-5 text-white" />
+          </div>
+          <span className="font-semibold text-gray-900">Istio Manager</span>
+        </div>
+      </SidebarHeader>
+      
+      <SidebarContent>
+        <SidebarGroup>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {menuItems.map((item) => (
+                <SidebarMenuItem key={item.title}>
+                  {item.hasSubmenu ? (
+                    <Collapsible>
+                      <CollapsibleTrigger asChild>
+                        <SidebarMenuButton className={`w-full justify-between ${item.isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}>
+                          <div className="flex items-center gap-3">
+                            <item.icon className="w-4 h-4" />
+                            <span>{item.title}</span>
+                          </div>
+                          <ChevronDown className="w-4 h-4" />
+                        </SidebarMenuButton>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent className="ml-6 mt-1">
+                        <div className="text-sm text-gray-600 py-1">Submenu items...</div>
+                      </CollapsibleContent>
+                    </Collapsible>
+                  ) : (
+                    <SidebarMenuButton className={`${item.isActive ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-100'}`}>
+                      <item.icon className="w-4 h-4" />
+                      <span>{item.title}</span>
+                    </SidebarMenuButton>
+                  )}
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+
+      <SidebarFooter className="p-4 border-t border-gray-200">
+        <div className="text-xs text-gray-500">
+          © 2024 Istio Manager<br />
+          Version 1.0.0
+        </div>
+      </SidebarFooter>
+    </Sidebar>
+  );
+}
