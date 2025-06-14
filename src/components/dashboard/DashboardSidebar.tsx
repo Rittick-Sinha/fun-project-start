@@ -12,6 +12,11 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { 
+  LayoutDashboard,
+  Activity,
+  GitFork,
+  Database,
+  GitBranch,
   BarChart3, 
   Eye, 
   BarChart, 
@@ -28,11 +33,21 @@ import { Link, useLocation } from "react-router-dom";
 const menuItems = [
   {
     title: "Dashboard",
-    icon: BarChart3,
+    icon: LayoutDashboard,
     href: "/",
   },
   {
     title: "Observability",
+    icon: Activity,
+    hasSubmenu: true,
+  },
+  {
+    title: "Traffic Management",
+    icon: GitFork,
+    hasSubmenu: true,
+  },
+  {
+    title: "Visibility",
     icon: Eye,
     hasSubmenu: true,
     submenuItems: [
@@ -41,26 +56,16 @@ const menuItems = [
     ]
   },
   {
-    title: "Traffic Management",
-    icon: BarChart,
-    hasSubmenu: true,
-  },
-  {
-    title: "Visibility",
-    icon: Eye,
-    href: "/visibility",
-  },
-  {
     title: "Security",
     icon: Shield,
   },
   {
     title: "Clusters",
-    icon: Server,
+    icon: Database,
   },
   {
-    title: "OB Integration",
-    icon: BarChart,
+    title: "Git Integration",
+    icon: GitBranch,
   },
   {
     title: "User Management",
